@@ -7,9 +7,11 @@ const char *hello(void)
   return HELLO_WORLD;
 }
 
+const char *text = "Hello again!";
+
 const char *helloAgain(void)
 {
-  const char *text = "Hello again!";
-
+  text = "Hello Dan"; //how to make the pointer And the data constant (just the data is right now)
+  // check cpp reference site
   return text;
 }

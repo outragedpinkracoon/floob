@@ -16,10 +16,25 @@ int get_size(const char *input)
   return size;
 }
 
+bool is_lower(const char input)
+{
+  return input >= 97 && input <= 122;
+}
+
+bool is_upper(const char input)
+{
+  return input >= 65 && input <= 90;
+}
+
 bool empty_or_single(const char *input)
 {
   int size = get_size(input);
   return size == 0 || size == 1;
+}
+
+bool non_letter(const char input)
+{
+  return !(is_lower(input)) && !(is_upper(input));
 }
 
 bool contains(const char *input, int search)
