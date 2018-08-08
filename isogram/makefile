@@ -20,6 +20,6 @@ memcheck: tests.out
 clean:
 	rm -rf *.o *.out *.out.dSYM
 
-tests.out: test/test_isogram.c src/isogram.c src/isogram.h src/string_utils.h src/string_utils.c
+tests.out: test/test_isogram.c src/isogram.c src/isogram.h
 	@echo Compiling $@
-	@$(CC) $(CFLAGS) src/string_utils.c src/isogram.c test/vendor/unity.c test/test_isogram.c -o tests.out
+	@$(CC) $(CFLAGS) src/isogram.c test/vendor/unity.c test/test_isogram.c -o tests.out

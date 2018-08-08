@@ -1,42 +1,35 @@
 #include "isogram.h"
-#include "string_utils.h"
 #include <ctype.h>
-#include <stdio.h>
+#include <limits.h>
+#include <string.h>
 
-bool is_isogram(const char phrase[])
-{
-  if (empty_or_single(phrase))
+bool is_isogram(const char phrase[]) {
+  int max = strlen(phrase);
+
+  if (max < 2) {
     return true;
+  }
 
-  int size = get_size(phrase);
-  char seen[size];
+  int counts[CHAR_MAX] = {0};
 
-  int next = 0;
+  for (int i = 0; i < max; i++) {
+    int letter = phrase[i];
 
-  for(int i = 0; i < size; i++)
-  {
-    char current_char = phrase[i];
-
-    if(non_letter(current_char))
-    {
+    if (!isalpha(letter)) {
       continue;
     }
 
-    if(is_upper(current_char))
-    {
-      current_char = tolower(phrase[i]);
+    if (isupper(letter)) {
+      letter = tolower(letter);
     }
 
-    if(contains(seen, current_char))
-    {
+    int count = counts[letter];
+
+    if (count == 0) {
+      counts[letter] = 1;
+    } else {
       return false;
     }
-    else
-    {
-      seen[next] = current_char;
-      next++;
-    }
   }
-
   return true;
 }
