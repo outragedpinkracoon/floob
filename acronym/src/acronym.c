@@ -4,8 +4,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define max 10
-
 char *abbreviate(const char *phrase) {
   if (phrase == NULL) return NULL;
 
@@ -13,7 +11,7 @@ char *abbreviate(const char *phrase) {
 
   if (phraseLen == 0) return NULL;
 
-  char acronym[max] = {0};
+  char *acronym = malloc(phraseLen + 1);
 
   bool saveNext = false;
   int next = 0;
@@ -39,8 +37,5 @@ char *abbreviate(const char *phrase) {
     }
   }
 
-  char *copy = malloc(max);
-  strcpy(copy, acronym);
-
-  return copy;
+  return acronym;
 }
