@@ -4,41 +4,43 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define max 10
+
 char *abbreviate(const char *phrase) {
-  if (phrase == NULL || strlen(phrase) == 0) {
-    return NULL;
-  }
+  if (phrase == NULL) return NULL;
 
-  int phraseLength = strlen(phrase);
+  int phraseLen = strlen(phrase);
 
-  char acronymChars[10] = {0};
-  bool saveNextChar = false;
-  int nextIndex = 0;
+  if (phraseLen == 0) return NULL;
 
-  for (int i = 0; i < phraseLength; i++) {
+  char acronym[max] = {0};
+
+  bool saveNext = false;
+  int next = 0;
+
+  for (int i = 0; i < phraseLen; i++) {
     char currentChar = phrase[i];
 
     if (i == 0) {
-      acronymChars[nextIndex] = toupper(currentChar);
-      nextIndex++;
+      acronym[next] = toupper(currentChar);
+      next++;
       continue;
     }
 
-    if (saveNextChar == true) {
-      acronymChars[nextIndex] = toupper(currentChar);
-      nextIndex++;
-      saveNextChar = false;
+    if (saveNext == true) {
+      acronym[next] = toupper(currentChar);
+      next++;
+      saveNext = false;
       continue;
     }
 
     if (isblank(currentChar) || currentChar == '-') {
-      saveNextChar = true;
+      saveNext = true;
     }
   }
 
-  char *str = malloc(5);
-  strcpy(str, acronymChars);
+  char *copy = malloc(max);
+  strcpy(copy, acronym);
 
-  return str;
+  return copy;
 }
-
