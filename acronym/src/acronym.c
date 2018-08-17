@@ -1,47 +1,44 @@
-#include <stdio.h>
 #include <ctype.h>
-#include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 char *abbreviate(const char *phrase) {
-  if(phrase == NULL)
+  if (phrase == NULL || strlen(phrase) == 0) {
     return NULL;
-  int max = strlen(phrase);
+  }
 
-  char stored[5] = { 0 };
-  bool saveNext = false;
+  int phraseLength = strlen(phrase);
+
+  char acronymChars[10] = {0};
+  bool saveNextChar = false;
   int nextIndex = 0;
 
-  for(int i = 0; i < max; i++)
-  {
-    char current_char = phrase[i];
-    //store the first letter and upcase it
-    if(i == 0) {
-      stored[nextIndex] = toupper(current_char);
+  for (int i = 0; i < phraseLength; i++) {
+    char currentChar = phrase[i];
+
+    if (i == 0) {
+      acronymChars[nextIndex] = toupper(currentChar);
       nextIndex++;
       continue;
     }
 
-    if(saveNext == true) {
-      stored[nextIndex] = toupper(current_char);
+    if (saveNextChar == true) {
+      acronymChars[nextIndex] = toupper(currentChar);
       nextIndex++;
-      saveNext = false;
+      saveNextChar = false;
       continue;
     }
 
-    if(isblank(current_char)) {
-      saveNext = true;
+    if (isblank(currentChar) || currentChar == '-') {
+      saveNextChar = true;
     }
   }
 
-  char * str = malloc(5);
-  strcpy(str, stored);
+  char *str = malloc(5);
+  strcpy(str, acronymChars);
 
   return str;
 }
 
-// Portable Network Graphics -> PNG
-// start looping
-// when you see a space, panic
-// Store the first letter

@@ -87,13 +87,13 @@ int main(void)
 
    RUN_TEST(test_basic_abbreviation);
    RUN_TEST(test_null_string);
-  //  RUN_TEST(test_lower_case_words);
-  //  RUN_TEST(test_punctuation);
-  //  RUN_TEST(test_non_acronym_all_caps_words);
-  //  RUN_TEST(test_hyphenated);
-  //  RUN_TEST(test_all_caps_words);
-  //  RUN_TEST(test_empty_string);
-  //  RUN_TEST(test_all_words_starting_with_lowercase);
+   RUN_TEST(test_lower_case_words);
+   RUN_TEST(test_punctuation);
+   RUN_TEST(test_non_acronym_all_caps_words);
+   RUN_TEST(test_hyphenated);
+   RUN_TEST(test_all_caps_words);
+   RUN_TEST(test_empty_string);
+   RUN_TEST(test_all_words_starting_with_lowercase);
    UnityEnd();
    return 0;
 }
