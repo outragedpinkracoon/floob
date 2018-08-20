@@ -14,20 +14,24 @@ char *abbreviate(const char *phrase) {
   char *acronym = malloc(phraseLen + 1);
 
   bool saveNext = false;
-  int next = 0;
+  int count = 0;
 
   for (int i = 0; i < phraseLen; i++) {
     char currentChar = phrase[i];
 
     if (i == 0) {
-      acronym[next] = toupper(currentChar);
-      next++;
+      *acronym = toupper(currentChar);
+      ++acronym;
+
+      count++;
       continue;
     }
 
     if (saveNext == true) {
-      acronym[next] = toupper(currentChar);
-      next++;
+      *acronym = toupper(currentChar);
+      ++acronym;
+
+      count++;
       saveNext = false;
       continue;
     }
@@ -36,6 +40,6 @@ char *abbreviate(const char *phrase) {
       saveNext = true;
     }
   }
-
-  return acronym;
+  *acronym = '\0';
+  return acronym - count;
 }
