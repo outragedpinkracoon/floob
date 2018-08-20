@@ -11,7 +11,7 @@ char *abbreviate(const char *phrase) {
 
   if (phraseLen == 0) return NULL;
 
-  char *acronym = malloc(phraseLen + 1);
+  char *acronym = calloc(0, phraseLen + 1);
 
   bool saveNext = false;
   int count = 0;
