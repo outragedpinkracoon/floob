@@ -10,27 +10,25 @@ char *abbreviate(const char *phrase) {
 
   if (phraseLen == 0) return NULL;
 
-  char *acronym = calloc(0, phraseLen + 1);
+  char *p = calloc(0, phraseLen + 1);
+  char *pStart = p;
 
   bool saveNext = false;
-  int count = 0;
 
   for (int i = 0; i < phraseLen; i++) {
     char currentChar = phrase[i];
 
     if (i == 0) {
-      *acronym = toupper(currentChar);
-      ++acronym;
+      *p = toupper(currentChar);
+      ++p;
 
-      count++;
       continue;
     }
 
     if (saveNext == true) {
-      *acronym = toupper(currentChar);
-      ++acronym;
+      *p = toupper(currentChar);
+      ++p;
 
-      count++;
       saveNext = false;
       continue;
     }
@@ -39,6 +37,6 @@ char *abbreviate(const char *phrase) {
       saveNext = true;
     }
   }
-  *acronym = '\0';
-  return acronym - count;
+  *p = '\0';
+  return pStart;
 }
