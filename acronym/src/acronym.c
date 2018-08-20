@@ -6,29 +6,28 @@
 char *abbreviate(const char *phrase) {
   if (phrase == NULL) return NULL;
 
-  int phraseLen = strlen(phrase);
+  int size = strlen(phrase);
+  if (size == 0) return NULL;
 
-  if (phraseLen == 0) return NULL;
+  char *p = malloc((size + 1) * sizeof(char));
+  char *p_start = p;
 
-  char *p = malloc((phraseLen + 1) * sizeof(char));
-  char *pStart = p;
+  const char *phrase_start = phrase;
 
   bool saveNext = false;
 
-  for (int i = 0; i < phraseLen; i++) {
-    char currentChar = phrase[i];
+  while(*phrase != '\0'){
+    char current = *phrase;
 
-    if (i == 0 || saveNext == true) {
+    if (phrase == phrase_start || saveNext == true) {
       saveNext = false;
-
-      *p++ = toupper(currentChar);
-      continue;
+      *p++ = toupper(current);
     }
-
-    if (isblank(currentChar) || currentChar == '-') {
+    else if (isblank(current) || current == '-') {
       saveNext = true;
     }
+    phrase++;
   }
   *p = '\0';
-  return pStart;
+  return p_start;
 }
