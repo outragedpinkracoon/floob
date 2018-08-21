@@ -14,18 +14,18 @@ char *abbreviate(const char *phrase) {
 
   const char *phrase_start = phrase;
 
-  bool saveNext = false;
-
   while(*phrase != '\0'){
     char current = *phrase;
+    char previous = *(phrase-1);
 
-    if (phrase == phrase_start || saveNext == true) {
-      saveNext = false;
+    if (phrase == phrase_start) {
       *p++ = toupper(current);
     }
-    else if (isblank(current) || current == '-') {
-      saveNext = true;
+    else if(previous == ' ' || previous == '-')
+    {
+      *p++ = toupper(current);
     }
+
     phrase++;
   }
   *p = '\0';
