@@ -9,19 +9,19 @@ char *abbreviate(const char *phrase) {
   int size = strlen(phrase);
   if (size == 0) return NULL;
 
+  //acronym will never be bigger than size of phrase
   char *p = malloc((size + 1) * sizeof(char));
-  char *p_start = p;
+  //remember this for reallocation later
+  char* p_start = p;
 
-  const char *phrase_start = phrase;
+  //always save the first character
+  *p++ = toupper(*phrase);
 
   while(*phrase != '\0'){
     char current = *phrase;
     char previous = *(phrase-1);
 
-    if (phrase == phrase_start) {
-      *p++ = toupper(current);
-    }
-    else if(previous == ' ' || previous == '-')
+    if(previous == ' ' || previous == '-')
     {
       *p++ = toupper(current);
     }
@@ -29,5 +29,8 @@ char *abbreviate(const char *phrase) {
     phrase++;
   }
   *p = '\0';
-  return p_start;
+
+  //resize the return value to save memory
+  size_t desired_size = ((p - p_start) + 1) * sizeof(char);
+  return realloc(p_start, desired_size);
 }
